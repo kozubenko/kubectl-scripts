@@ -3,6 +3,8 @@
 # This script is a kubectl plugin that gets resource usage statistics for pods or nodes.
 # It should be saved as 'kubectl-resource-stats' - preferred but not required naming convention and made executable.
 
+# Usage: kubectl-resource-stats <pods|nodes> <namespace>
+
 if [[ -z "$1" ]] || [[ -z "$2" ]]; then
   echo "Usage: kubectl-resource-stats <pods|nodes> <namespace>"
   exit 1
@@ -23,5 +25,5 @@ do
     MEMORY=$(echo "$line" | awk '{print $4}')
   fi
 
-  echo "Resource: $RESOURCE_TYPE, Namespace: $NAMESPACE, Name: $NAME, CPU: $CPU, Memory: $MEMORY"
+  echo "$RESOURCE_TYPE, $NAMESPACE, $NAME, $CPU, $MEMORY"
 done
